@@ -17,13 +17,13 @@ class App extends Component {
   }  
   // you can define other properties as well, but still, state is a very special one.    
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     // DON'T DO THIS : this.state.students[2].name = 'Hailey'; 
     // 리액트에선 이렇게 state을 directly change하지 못함!
     this.setState({
       students: [ //이렇게 특정 state이름을 지칭해주면, otherState remains untouched!
-      {name: 'Junnie', age: 23},
-      {name: 'Hailey', age: 20},
+      {name: newName, age: 23},
+      {name: 'Harnie', age: 20},
       {name: 'Jennifer', age: 23}
       ]
     })
@@ -39,8 +39,10 @@ class App extends Component {
         <h1>Hi, I am a react app! :) </h1>
         <p>Yay! This is really working!</p>
 
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-
+        <button onClick={() => this.switchNameHandler('New name_1!')}>Switch Name</button> 
+                        {/*원랜 메소드() 이런식으로 쓰면 렌더하는 즉시 호출돼서 이렇게 쓰면 안되는데, 
+                           얜 조건을 달고 함수 안에 넣어준거니까 이렇게 써주는게 맞음!!*/}
+                        {/*이런식으로 함수호출해서 쓸수도 있지만, 비효율적일 수 있어서 웬만하면 아래처럼 bind메소드를 쓰길 추천!*/}
         <Person 
           name={this.state.students[0].name} 
           age={this.state.students[0].age} 
@@ -49,7 +51,8 @@ class App extends Component {
         <Person 
           name={this.state.students[1].name} 
           age={this.state.students[1].age}
-          click={this.switchNameHandler} //  ** you can send methods as props to functional components!  
+          click={this.switchNameHandler.bind(this, 'New name_2!')} 
+          //  ** you can send methods as props to functional components! (using this 'bind' method!) 
         >                                   
           Hobby: Sleeping
         </Person>
