@@ -13,15 +13,31 @@ class App extends Component {
       {name: 'Junnie', age: 23},
       {name: 'Harnie', age: 20},
       {name: 'Jennifer', age: 23}
-    ]
+    ],
+    otherState: 'some other value'
   }  
   // you can define other properties as well, but still, state is a very special one.    
+
+  switchNameHandler = () => {
+    // DON'T DO THIS : this.state.students[2].name = 'Hailey'; 
+    // 리액트에선 이렇게 state을 directly change하지 못함!
+    this.setState({
+      students: [ //이렇게 특정 state이름을 지칭해주면, otherState remains untouched!
+      {name: 'Junnie', age: 23},
+      {name: 'Hailey', age: 20},
+      {name: 'Jennifer', age: 23}
+      ]
+    })
+    // setState은 우리가 앞서 'react'로부터 import하고 extend해온 { Component }에 미리 정의되어있는 메소드임.
+    // 그래서, 우리가 따로 정의해준적은 없지만 곧바로 this.setState으로 갖다 쓸 수 있는것임.
+  }
 
   render() {
     return (
       <div className="App">
-        <h1>Hi, I'm a react app! :) </h1>
+        <h1>Hi, I am a react app! :) </h1>
         <p>Yay! This is really working!</p>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
         <Person name={this.state.students[0].name} age={this.state.students[0].age} />
         <Person name={this.state.students[1].name} age={this.state.students[1].age}>Hobby: Sleeping</Person>
         <Person name={this.state.students[2].name} age={this.state.students[2].age}/>
