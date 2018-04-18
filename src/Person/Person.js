@@ -6,8 +6,12 @@ const person = (props) => { // props argument를 pass 해줘야 다른데서 이
 		<div>
 			<p onClick={props.click}>I'm {props.name}! and I am {props.age} years old!</p>
 			<p>{props.children}</p> 
-		</div>					// children이란 term은 정해져있는 약속임. component 태그 사이에 들어가는 애들을 지칭함.
-		)						// children은 plain text뿐 아니라 html 형태의 jsx코드나 다른 react component가 될수도 있음.
+				{/*children이란 term은 정해져있는 약속임. component 태그 사이에 들어가는 애들을 지칭함.
+				   children은 plain text뿐 아니라 html 형태의 jsx코드나 다른 react component가 될수도 있음.*/}
+			<input type="text" onChange={props.changed} placeholder={props.name}/>
+				{/* onChange will be fired whenever the value of the input changes! */}	   
+		</div>					
+		)			
 
 };                                   
 // * when using a class-based component, it's this.props 
