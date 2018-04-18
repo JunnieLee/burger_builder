@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person'
 
@@ -31,16 +30,35 @@ class App extends Component {
     // setState은 우리가 앞서 'react'로부터 import하고 extend해온 { Component }에 미리 정의되어있는 메소드임.
     // 그래서, 우리가 따로 정의해준적은 없지만 곧바로 this.setState으로 갖다 쓸 수 있는것임.
   }
+// event occurs -> change state with this.setState method 
 
   render() {
     return (
       <div className="App">
+
         <h1>Hi, I am a react app! :) </h1>
         <p>Yay! This is really working!</p>
+
         <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.students[0].name} age={this.state.students[0].age} />
-        <Person name={this.state.students[1].name} age={this.state.students[1].age}>Hobby: Sleeping</Person>
-        <Person name={this.state.students[2].name} age={this.state.students[2].age}/>
+
+        <Person 
+          name={this.state.students[0].name} 
+          age={this.state.students[0].age} 
+        />
+
+        <Person 
+          name={this.state.students[1].name} 
+          age={this.state.students[1].age}
+          click={this.switchNameHandler} //  ** you can send methods as props to functional components!  
+        >                                   
+          Hobby: Sleeping
+        </Person>
+
+        <Person 
+          name={this.state.students[2].name} 
+          age={this.state.students[2].age}
+        />
+
       </div>
     );
   }
